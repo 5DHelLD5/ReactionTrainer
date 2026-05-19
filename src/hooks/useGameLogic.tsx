@@ -134,7 +134,7 @@ export function useGameLogic() {
    * Начинает следующую попытку
    */
   const startAttempt = useCallback(
-    (attemptNum: number) => {
+    function startAttemptFn(attemptNum: number) {
       const config = DIFFICULTY_CONFIGS[difficultyRef.current];
 
       // Проверяем: если попытки закончились — завершаем
@@ -216,7 +216,7 @@ export function useGameLogic() {
 
           // Пауза и переход к следующей попытке
           feedbackTimerRef.current = setTimeout(() => {
-            startAttempt(attemptNum + 1);
+            startAttemptFn(attemptNum + 1);
           }, 1000);
         }, config.reactionWindow);
       }, delay);
